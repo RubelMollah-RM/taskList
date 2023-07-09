@@ -16,6 +16,7 @@ clearAllTask.addEventListener('click', clearTask);
 
 
 
+
 //Define Funection...
 
 function addTask(e) {
@@ -23,7 +24,7 @@ function addTask(e) {
     if (taskAdd.value === '') {
         // alert('At first enter a new task..');
     }
-    else{
+    else {
         let li = document.createElement('li');
         let taskInput = document.createTextNode(taskAdd.value + " ");
         li.appendChild(taskInput);
@@ -47,9 +48,9 @@ function addTask(e) {
 
 //Remove task from list
 
-function removeTask (e){
-    if(e.target.hasAttribute('href')){
-        if(confirm("Are you sure ?")){
+function removeTask(e) {
+    if (e.target.hasAttribute('href')) {
+        if (confirm("Are you sure ?")) {
             let element = e.target.parentElement;
             element.remove();
         }
@@ -58,6 +59,24 @@ function removeTask (e){
 
 // Clear All Task...
 
-function clearTask (e){
+function clearTask(e) {
     taskList.innerHTML = " ";
-}
+};
+
+
+
+// Filter all task...
+
+filterTask.addEventListener("keyup", (e) => {
+    let text = e.target.value.toLowerCase();
+
+    document.querySelectorAll('li').forEach((task) => {
+        let item = task.firstChild.textContent;
+        if (item.toLowerCase().indexOf(text) != -1) {
+            task.style.display = 'block';
+        }
+        else {
+            task.style.display = 'none';
+        }
+    });
+});
